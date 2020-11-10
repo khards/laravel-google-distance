@@ -2,6 +2,8 @@
 
 namespace Pnlinh\GoogleDistance\Contracts;
 
+use Pnlinh\GoogleDistance\Response;
+
 interface GoogleDistanceContract
 {
     /**
@@ -12,5 +14,5 @@ interface GoogleDistanceContract
      *
      * @return int
      */
-    public function calculate($origins, $destinations): int;
+    public function calculate($origins, $destinations): Response;
 }

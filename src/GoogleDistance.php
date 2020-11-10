@@ -96,12 +96,12 @@ class GoogleDistance implements GoogleDistanceContract
      *
      * @return int
      */
-    public function calculate($origins, $destinations): int
+    public function calculate($origins, $destinations): Response
     {
         $client = new Client();
-
+        $response = new Response();
         try {
-            $response = $client->get($this->apiUrl, [
+            $apiResponse = $client->get($this->apiUrl, [
                 'query' => [
                     'units'        => 'imperial',
                     'origins'      => $origins,
@@ -111,19 +111,15 @@ class GoogleDistance implements GoogleDistanceContract
                 ],
             ]);
 
-            $statusCode = $response->getStatusCode();
+            $statusCode = $apiResponse->getStatusCode();
 
             if (200 === $statusCode) {
-                $responseData = json_decode($response->getBody()->getContents());
-
-                if (isset($responseData->rows[0]->elements[0]->distance)) {
-                    return $responseData->rows[0]->elements[0]->distance->value;
-                }
+                $response->parse(json_decode($apiResponse->getBody()->getContents()));
             }
-
-            return -1;
         } catch (Exception $e) {
-            return -1;
+            $response->exception = $e;
         }
+
+        return $response;
     }
 }
