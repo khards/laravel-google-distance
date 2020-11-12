@@ -15,7 +15,7 @@ class Response
     const SECONDS_IN_MINUTE = 60;
 
     public $status = 'FAIL';
-
+    public $error_message = '';
     public $exception = null;
 
     public $destination_address;
@@ -51,7 +51,14 @@ class Response
             $this->duration_value = $responseData->rows[0]->elements[0]->duration->value;
             $this->duration_text = $responseData->rows[0]->elements[0]->duration->text;
         }
-        $this->status = $responseData->status;
+
+        if (isset($responseData->status)) {
+            $this->status = $responseData->status;
+        }
+
+        if (isset($responseData->error_message)) {
+            $this->error_message = $responseData->error_message;
+        }
     }
 
     /**

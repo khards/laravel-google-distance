@@ -40,12 +40,18 @@ $distance = google_distance('From Address', 'To Address');
 
 ## Test
 
+Update GOOGLE_API_KEY in phpunit.xml to your API key and then run:
+
 ```bash
 composer test
 ```
 
 ## Credits
 
+Original by:
 - [Pham Ngoc Linh](https://github.com/pnlinh)
+
+Enhanced by:
+- [DJ Keith Hards](https://keithhards.co.uk)
 
 For more info, please visit https://developers.google.com/maps/documentation/distance-matrix/

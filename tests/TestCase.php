@@ -6,9 +6,13 @@ use Pnlinh\GoogleDistance\Providers\GoogleDistanceServiceProvider;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
+    protected $googleApiKey = null;
+
     public function setUp(): void
     {
         parent::setUp();
+
+        $this->googleApiKey = env('GOOGLE_API_KEY');
     }
 
     public function getPackageProviders($app)
